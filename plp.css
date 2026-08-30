@@ -1,0 +1,294 @@
+:root {
+  /* Layout tokens */
+  --plp_cardRadius: 8px;
+  --plp_cardPadding: 16px;
+  --plp_cardGap: 12px;
+  --plp_fontFamily: "Inter", sans-serif;
+
+  /* Theme tokens */
+  --plp_surface: #ffffff;
+  --plp_ink: #000000;
+  --plp_inkMuted: #666666;
+  --plp_line: #dddddd;
+  --plp_primaryBtnBg: #333333;
+  --plp_primaryBtnFg: #ffffff;
+}
+
+body {
+  font-family: var(--plp_fontFamily);
+  background: var(--plp_surface);
+  color: var(--plp_ink);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Grid layout: mobile first */
+.plpGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--plp_cardGap);
+  padding: var(--plp_cardPadding);
+}
+
+@media (min-width: 768px) {
+  .plpGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .plpGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Header section */
+.plpHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--plp_cardPadding);
+  border-bottom: 1px solid var(--plp_line);
+}
+
+.plpHeadLeft {
+  flex: 1;
+}
+
+.plpCollectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.plpCollectionSubtitle {
+  font-size: 1rem;
+  color: var(--plp_inkMuted);
+  margin: 4px 0 0;
+}
+
+.plpCartToggle {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.plpCardImage {
+  width: 100%;
+  height: 260px; /*ensures gradient block shows */
+  border-radius: var(--plp_cardRadius);
+  background-size: cover;
+  background-position: center;
+  margin-bottom: var(--plp_cardGap);
+}
+
+.plpCard {
+  background: var(--plp_surface);
+  border-radius: var(--plp_cardRadius);
+  padding: var(--plp_cardPadding);
+}
+
+.plpCardName {
+  margin: 0 0 6px;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.plpCardPrice {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.plpCardCompare {
+  margin: 0 0 8px;
+  color: var(--plp_inkMuted);
+  text-decoration: line-through;
+  font-size: 13px;
+}
+
+.plpCardCategory {
+  margin: 0 0 12px;
+  color: var(--plp_inkMuted);
+  font-size: 13px;
+}
+
+.plpCardControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.plpVariantSelect {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--plp_line);
+  border-radius: 999px;
+  background: var(--plp_surface);
+  color: var(--plp_ink);
+  font: inherit;
+}
+
+.plpAddBtn {
+  flex: 0 0 auto;
+  width: auto;
+  margin-top: 0;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--plp_primaryBtnBg);
+  color: var(--plp_primaryBtnFg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plpDrawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--plp_line);
+}
+
+.plpDrawerHeader h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.plpCartCloseBtn {
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.plpCartEmpty {
+  padding: 24px 20px;
+  color: var(--plp_inkMuted);
+}
+
+.plpCartItems {
+  padding: 0 20px;
+}
+
+.plpCartItem {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--plp_line);
+}
+
+.plpCartItemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.plpCartQtyBtn {
+  border: 1px solid var(--plp_line);
+  background: var(--plp_surface);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.plpCartRemoveBtn {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.plpDrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  visibility: hidden;
+}
+
+.plpDrawer[aria-hidden="false"] {
+  visibility: visible;
+}
+
+.plpDrawerScrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.plpDrawerPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 92vw;
+  height: 100%;
+  background: var(--plp_surface);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.12);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  overflow-y: auto;
+}
+
+.plpDrawer[aria-hidden="false"] .plpDrawerScrim {
+  opacity: 1;
+}
+
+.plpDrawer[aria-hidden="false"] .plpDrawerPanel {
+  transform: translateX(0);
+}
+
+.plpCartSubtotal {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-top: 1px solid var(--plp_line);
+  font-size: 16px;
+}
+
+.plpCheckoutBtn {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 0 20px 20px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--plp_primaryBtnBg);
+  color: var(--plp_primaryBtnFg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plpToast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--plp_primaryBtnBg);
+  color: var(--plp_primaryBtnFg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 2000;
+}
+
+.plpToastVisible {
+  opacity: 1;
+}
+
+.plpCartItemImage {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--plp_cardRadius);
+  background-size: cover;
+  background-position: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}

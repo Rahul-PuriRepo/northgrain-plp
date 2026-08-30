@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NORTHGRAIN – Drinkware</title>
+  <link rel="stylesheet" href="plp.css">
+</head>
+<body class="plpProductListingPage">
+
+  <!-- Header -->
+  <header class="plpHead">
+
+  <div class="plpHeadLeft">
+    <h1 data-collection-title class="plpCollectionTitle"></h1>
+    <p data-collection-subtitle class="plpCollectionSubtitle"></p>
+  </div>
+
+  <button
+    data-cart-toggle
+    class="plpCartToggle"
+    aria-label="Open cart"
+  >
+    Cart <span data-cart-count hidden>0</span>
+  </button>
+
+</header>
+
+  <!-- Product Grid -->
+  <main>
+    <div data-grid-mount class="plpGrid"></div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <aside data-drawer-mount class="plpDrawer" aria-hidden="true"></aside>
+
+  <!-- Toast -->
+  <div data-toast class="plpToast"></div>
+
+  <!-- Fixture Data -->
+  <script>
+    window.shopifyLiquidValuesPLP = {
+      collectionTitle: "Drinkware",
+      collectionSubtitle: "Small‑batch ceramics and glassware",
+      products: [
+        {
+          id: "lumen-mug",
+          name: "Lumen Ceramic Mug",
+          category: "Drinkware",
+          price: 1290,
+          compareAt: 1590,
+          gradient: "linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)",
+          variants: [
+            { id: "ivory", name: "Ivory" },
+            { id: "charcoal", name: "Charcoal" }
+          ]
+        },
+        {
+          id: "harbor-tumbler",
+          name: "Harbor Tumbler",
+          category: "Drinkware",
+          price: 890,
+          compareAt: null,
+          gradient: "linear-gradient(135deg, #d7d2cc 0%, #304352 100%)",
+          variants: [
+            { id: "smoke", name: "Smoke" },
+            { id: "clear", name: "Clear" }
+          ]
+        },
+        {
+          id: "kiln-carafe",
+          name: "Kiln Carafe",
+          category: "Drinkware",
+          price: 1890,
+          compareAt: 2190,
+          gradient: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
+          variants: [
+            { id: "sandstone", name: "Sandstone" },
+            { id: "onyx", name: "Onyx" }
+          ]
+        },
+        {
+          id: "summit-glass",
+          name: "Summit Glass",
+          category: "Drinkware",
+          price: 690,
+          compareAt: null,
+          gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
+          variants: [
+            { id: "amber", name: "Amber" },
+            { id: "frost", name: "Frost" }
+          ]
+        },
+        {
+          id: "ridge-pitcher",
+          name: "Ridge Pitcher",
+          category: "Drinkware",
+          price: 2290,
+          compareAt: 2490,
+          gradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+          variants: [
+            { id: "cloud", name: "Cloud" },
+            { id: "slate", name: "Slate" }
+          ]
+        },
+        {
+          id: "ember-cup",
+          name: "Ember Cup",
+          category: "Drinkware",
+          price: 990,
+          compareAt: null,
+          gradient: "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
+          variants: [
+            { id: "sunset", name: "Sunset" },
+            { id: "dawn", name: "Dawn" }
+          ]
+        }
+      ]
+    };
+  </script>
+
+  <!-- JS -->
+  <script src="plp.js"></script>
+</body>
+</html>
