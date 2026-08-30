@@ -292,3 +292,14 @@ body {
   margin-right: 12px;
   flex-shrink: 0;
 }
+
+.plpCartToggle:focus-visible,
+.plpVariantSelect:focus-visible,
+.plpAddBtn:focus-visible,
+.plpCartCloseBtn:focus-visible,
+.plpCartQtyBtn:focus-visible,
+.plpCartRemoveBtn:focus-visible,
+.plpCheckoutBtn:focus-visible {
+  outline: 2px solid var(--plp_ink);
+  outline-offset: 2px;
+}
