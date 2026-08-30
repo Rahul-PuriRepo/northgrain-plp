@@ -2,6 +2,10 @@
 
 A responsive product listing page (PLP) implementation built with vanilla HTML, CSS, and JavaScript.
 
+## Demo
+
+[Watch the PLP walkthrough](https://youtu.be/ahOwOO1aw9U)
+
 ## Features
 
 - Responsive product grid with mobile, tablet, and desktop layouts
