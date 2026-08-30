@@ -15,14 +15,20 @@
   };
 
   plp.selectors = {
-    gridMount: "[data-grid-mount]",
-    drawerMount: "[data-drawer-mount]",
-    cartCount: "[data-cart-count]",
-    toastMount: "[data-toast]",
-    cartToggle: "[data-cart-toggle]",
-    collectionTitle: "[data-collection-title]",
-    collectionSubtitle: "[data-collection-subtitle]"
-  };
+  gridMount: "[data-grid-mount]",
+  drawerMount: "[data-drawer-mount]",
+  cartCount: "[data-cart-count]",
+  toastMount: "[data-toast]",
+  cartToggle: "[data-cart-toggle]",
+  collectionTitle: "[data-collection-title]",
+  collectionSubtitle: "[data-collection-subtitle]",
+  addButton: ".plpAddBtn",
+  card: ".plpCard",
+  variantSelect: ".plpVariantSelect",
+  cartScrim: "[data-cart-scrim]",
+  cartClose: "[data-cart-close]",
+  cartAction: "[data-cart-action]"
+};
 
   plp.constants = {
   	EVT_CART_UPDATED: "plp:cart-updated"
@@ -328,7 +334,7 @@ plp.events.bind = function () {
 
   grid.addEventListener("click", function (event) {
 
-    var button = event.target.closest(".plpAddBtn");
+    var button = event.target.closest(plp.selectors.addButton);
 
     if (!button) {
       return;
@@ -336,9 +342,7 @@ plp.events.bind = function () {
 
     var productId = button.dataset.productId;
 
-    var select = button
-      .closest(".plpCard")
-      .querySelector(".plpVariantSelect");
+    var select = button.closest(plp.selectors.card).querySelector(plp.selectors.variantSelect);
 
     var variantId = select.value;
 
@@ -383,72 +387,69 @@ plp.events.bind = function () {
 
     drawer.addEventListener("click", function (event) {
 
-      var scrim = event.target.closest("[data-cart-scrim]");
+  var scrim = event.target.closest(plp.selectors.cartScrim);
 
-     if (scrim) {
-      plp.closeDrawer();
-  	return;
-     }
-
-    var closeButton = event.target.closest("[data-cart-close]");
-
-    if (closeButton) {
-      plp.closeDrawer();
-      return;
-    }
-
-
-	var checkoutButton = event.target.closest("[data-cart-action='checkout']");
-
-if (checkoutButton) {
-  if (plp.state.cart.size === 0) {
+  if (scrim) {
+    plp.closeDrawer();
     return;
   }
 
-  plp.render.toast("Checkout started");
-  console.log("Checkout:", plp.state.cart);
+  var closeButton = event.target.closest(plp.selectors.cartClose);
 
-  return;
-}
-      var actionButton = event.target.closest("[data-cart-action]");
-
-      if (!actionButton) {
-        return;
-      }
-
-      var action = actionButton.dataset.cartAction;
-      var cartKey = actionButton.dataset.cartKey;
-
-      var item = plp.state.cart.get(cartKey);
-
-      if (!item) {
-        return;
-      }
-
-      if (action === "increase") {
-        item.quantity += 1;
-      }
-
-      if (action === "decrease") {
-        item.quantity -= 1;
-
-        if (item.quantity <= 0) {
-          plp.state.cart.delete(cartKey);
-        }
-      }
-
-      if (action === "remove") {
-        plp.state.cart.delete(cartKey);
-      }
-
-      plp.domUtils.emitCustomEvent({
-  eventName: plp.constants.EVT_CART_UPDATED,
-  detail: {
-    cart: plp.state.cart,
-    action: action
+  if (closeButton) {
+    plp.closeDrawer();
+    return;
   }
+
+  var actionButton = event.target.closest(plp.selectors.cartAction);
+
+  if (!actionButton) {
+    return;
+  }
+
+  var action = actionButton.dataset.cartAction;
+  var cartKey = actionButton.dataset.cartKey;
+
+  if (action === "checkout") {
+    if (plp.state.cart.size === 0) {
+      return;
+    }
+
+    plp.render.toast("Checkout started");
+    console.log("Checkout:", plp.state.cart);
+    return;
+  }
+
+  var item = plp.state.cart.get(cartKey);
+
+  if (!item) {
+    return;
+  }
+
+  if (action === "increase") {
+    item.quantity += 1;
+  }
+
+  if (action === "decrease") {
+    item.quantity -= 1;
+
+    if (item.quantity <= 0) {
+      plp.state.cart.delete(cartKey);
+    }
+  }
+
+  if (action === "remove") {
+    plp.state.cart.delete(cartKey);
+  }
+
+  plp.domUtils.emitCustomEvent({
+    eventName: plp.constants.EVT_CART_UPDATED,
+    detail: {
+      cart: plp.state.cart,
+      action: action
+    }
+  });
 });
-    });
 
   
   }
@@ -473,10 +474,17 @@ document.addEventListener(
     plp.render.cartCount();
 
     if (event.detail.action === "add") {
-      plp.render.toast("Added to cart");
-    } else {
-      plp.render.toast("Cart updated");
-    }
+  plp.render.toast("Added to cart");
+} else if (event.detail.action === "remove") {
+  plp.render.toast("Item removed");
+} else if (event.detail.action === "increase") {
+  plp.render.toast("Quantity increased");
+} else if (event.detail.action === "decrease") {
+  plp.render.toast("Quantity decreased");
+} else {
+  plp.render.toast("Cart updated");
+}
+
   }
 );
 
